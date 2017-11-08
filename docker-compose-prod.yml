@@ -1,0 +1,40 @@
+version: '2.1'
+services:
+    php:
+        build:
+            context:  .
+            args:
+                PROJECT_ENV: prod
+        image: poc/application
+        tty: true
+        environment:
+            # HOST
+            SYMFONY__FRONTEND_URL: http://www.poc.tf1.fr
+            SYMFONY__FRONTEND_HOSTNAME: www.poc.tf1.fr
+            SYMFONY__STATIC_HOSTNAME: s.www.poc.fr
+            SYMFONY__BACKEND_HOSTNAME: smd.backoffice.tf1.fr
+
+            # DATABASE
+            SYMFONY__DATABASE_HOST: devmutmys701-adm.dedale.tf1.fr
+            SYMFONY__DATABASE_PORT: 4363
+            SYMFONY__DATABASE_NAME: GCANEPA_DEVDCIM701
+            SYMFONY__DATABASE_USER: dev701_usr
+            SYMFONY__DATABASE_PASSWORD: dev701pwd
+
+            # REDIS
+            SYMFONY__REDIS_HOST: redis
+            SYMFONY__REDIS_PORT: 6379
+
+            # GRAYLOG
+            SYMFONY__GRAYLOG_HOST: graylog
+            SYMFONY__GRAYLOG_PORT: 12201
+
+            # CONFIG
+            SYMFONY__SECRET: 15ef9csqcsq*/4dqs9hbdj-
+            SYMFONY__ASSETS_VERSION: 1
+
+            #HOST
+            APPLICATION_ENV: prod
+            PORT: 80
+        ports:
+            - 80:80

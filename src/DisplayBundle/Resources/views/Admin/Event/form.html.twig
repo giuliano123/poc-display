@@ -1,0 +1,51 @@
+{% extends "@Admin/base_form.html.twig" %}
+
+{% block form_panel %}
+    <div class="tab-content">
+        <div class="tab-pane active" id="params">
+            <div class="row">
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>Options de publication</legend>
+                        <div class="row">
+                            <div class="col-md-4">{{ form_row(form.publicationDate) }} </div>
+                            <div class="col-md-4">{{ form_row(form.publicationEndDate) }}</div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>Informations</legend>
+                        {{ form_row(form.title) }}
+                        {{ form_row(form.subtitle) }}
+                        {{ form_row(form.eventDate) }}
+                        {{ form_row(form.place) }}
+
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Image d'illustration</legend>
+                        {{ form_row(form.picture) }}
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Poster</legend>
+                        {{ form_row(form.poster) }}
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block panel_navigation %}
+    <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#params" data-toggle="tab">Paramètres</a></li>
+    </ul>
+{% endblock %}
+
+{% block panel_action_cancel %}
+    <a href="{{ path("DisplayBundle_Event_list") }}" class="btn btn-link">Retour</a>
+{% endblock %}

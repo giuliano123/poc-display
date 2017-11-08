@@ -1,0 +1,44 @@
+{% extends "@Admin/base_list.html.twig" %}
+
+{% block title %}
+    <div class="page-header">
+        <h1>Module spectacle <small>- Liste des spectacles</small></h1>
+    </div>
+{% endblock %}
+
+{% block list_thead %}
+    <tr>
+        <th>#</th>
+        <th>Titre</th>
+        <th>Date de publication</th>
+        <th></th>
+    </tr>
+{% endblock %}
+
+{% block list_tbody %}
+    {% if events is defined %}
+        {% for event in events %}
+            <tr>
+                <th scope="row">{{ event.id }}</th>
+                <th>{{ event.title }}</th>
+                <th>{{ event.publicationDate.format('d/m/Y') }}</th>
+                <th>
+                    <div class="btn-toolbar" role="toolbar">
+                        <a href="{{ path('DisplayBundle_Event_edit', {'pk': event.id}) }}" class="btn btn-xs btn-default" title="Editer le spectacle">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a href="{{ path('DisplayBundle_Event_delete', {'pk': event.id}) }}"class="btn btn-xs btn-danger" data-function="confirmDel" data-msg="un spectacle" title="Supprimer le spectacle">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block aside %}
+    <a href="{{ path('DisplayBundle_Event_new') }}" class="btn btn-block btn-primary btn-lg">
+        <span class="glyphicon glyphicon-plus"></span> Ajouter un spectacle
+    </a>
+{% endblock aside %}

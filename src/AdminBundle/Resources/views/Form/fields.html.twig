@@ -1,0 +1,243 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_row %}
+    {% spaceless %}
+        {% set container_attr = container_attr|default({}) %}
+        {% set container_attr = container_attr|merge({'class': (container_attr.class|default('') ~ ' form-group-' ~ form.vars.id )}) %}
+        {% set container_attr = container_attr|merge({'class': (container_attr.class|default('') ~ ' form-group')}) %}
+        {% if not form.vars.valid %}
+            {% set container_attr = container_attr|merge({'class': (container_attr.class|default('') ~ ' has-error')}) %}
+        {% endif %}
+        <div{% for attrname, attrvalue in container_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        {{ block('form_help') }}
+        {{ form_errors(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block form_label %}
+    {% spaceless %}
+        {% if required and label is not same as(false) %}
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+            {% set label = label ~ ' *' %}
+        {% endif %}
+        {{ parent() }}
+    {% endspaceless %}
+{% endblock form_label %}
+
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set type = type|default('text') %}
+        {% if 'file' != type %}
+            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control')|trim }) %}
+        {% endif %}
+        {{ parent() }}
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block choice_widget_collapsed %}
+    {% spaceless %}
+        {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control')|trim }) %}
+        {{ parent() }}
+    {% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block textarea_widget %}
+    {% spaceless %}
+        {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control')|trim }) %}
+        {{ parent() }}
+    {% endspaceless %}
+{% endblock textarea_widget %}
+
+{% block choice_widget_expanded %}
+    {% spaceless %}
+        {% if form.vars.multiple is defined and form.vars.multiple %}
+            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' checkbox-grid')|trim }) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                {% if form.vars.multiple is defined and form.vars.multiple %}
+                    {{ form_row(child, { 'no_form_group': true }) }}
+                {% else %}
+                    {{ form_widget(child) }}
+                    {{ form_label(child) }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block checkbox_row %}
+    {% spaceless %}
+
+        {% if no_form_group is not defined or no_form_group == false %}
+            <div class="form-group{% if not form.vars.valid %} has-error{% endif %}">
+            {% if parent_label is defined %}
+                <label>{{ parent_label }}</label>
+            {% endif %}
+            <div class="checkbox">
+        {% else %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' checkbox-inline')|trim}) %}
+        {% endif %}
+
+        {% if label is not same as(false) %}
+            {% if not compound %}
+                {% set label_attr = label_attr|merge({'for': id}) %}
+            {% endif %}
+            {% if required %}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+            {% endif %}
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+            {% if required %}
+                {% set label = label ~ ' *' %}
+            {% endif %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+            {{ block('checkbox_widget') }}
+            {{ label|trans({}, translation_domain)|raw }}
+            </label>
+        {% else %}
+            {{ block('checkbox_widget') }}
+        {% endif %}
+        {{ form_errors(form) }}
+
+        {% if no_form_group is not defined or no_form_group == false %}
+            </div>
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock checkbox_row %}
+
+{% block date_widget %}
+    {% spaceless %}
+        {% if widget == 'single_text' %}
+            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control')|trim }) %}
+            {{ block('datepicker_widget') }}
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock date_widget %}
+
+{% block datepicker_widget %}
+    {% spaceless %}
+        <div class="input-group date" data-date="date">
+            {{ block('form_widget_simple') }}
+            <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
+        </div>
+    {% endspaceless %}
+{% endblock datepicker_widget %}
+
+{% block datetime_widget %}
+    {% spaceless %}
+        {% if widget == 'single_text' %}
+            <div data-date="datetime" class="input-group date">
+                {{ block('form_widget_simple') }}
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock datetime_widget %}
+
+{% block form_help %}
+    {% spaceless %}
+        {% set help = help|default('') %}
+        {% if help is not empty %}
+            <span class="help-block">{{ help|trans({}, 'admin') }}</span>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_help %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error.message|trans(error.messageParameters, translation_domain) }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block autocomplete_row %}
+    {% spaceless %}
+        {% set multiple = form.vars.multiple %}
+        <div class="form-group{% if not form.vars.valid %} has-error{% endif %}">
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+            {{ block('form_help') }}
+            {{ form_errors(form) }}
+        </div>
+
+        <script type="text/javascript">
+            (function($) {
+                $(document).ready(function() {
+                    var $formatData = function(result) {
+                        return result.label;
+                    };
+                    $("#{{ form.vars.id }}").select2({
+                        multiple: {{ multiple ? 'true' : 'false' }},
+                        allowClear: true,
+                        minimumInputLength: {{ form.vars.min_input_length }},
+                        ajax: {
+                            url: "{{ path(form.vars.route, form.vars.route_options)|e('js') }}",
+                            dataType: 'json',
+                            data: function (term, page) {
+                                return {
+                                    'term': term
+                                };
+                            },
+                            results: function (data, page) {
+                                return {
+                                    results: data
+                                };
+                            }
+                        },
+                        initSelection: function(element, callback) {
+                            callback({{ form.vars.value_label|json_encode|raw }})
+                        },
+                        formatResult: $formatData,
+                        formatSelection: $formatData
+                    });
+                });
+            })(jQuery);
+        </script>
+    {% endspaceless %}
+{% endblock %}
+
+{#{% block file_widget %}#}
+    {#{% spaceless %}#}
+        {#{{ block('form_widget') }}#}
+        {#{% if image_url is not null %}#}
+            {#<img src="{{ asset(image_url) }}"/>#}
+        {#{% endif %}#}
+    {#{% endspaceless %}#}
+{#{% endblock %}#}
+
+{% block vich_file_widget %}
+    {% spaceless %}
+        <div class="vich-file">
+            {{ form_widget(form.file) }}
+            {% if form.delete is defined %}
+                {{ form_row(form.delete) }}
+            {% endif %}
+
+            {% if download_uri is defined and download_uri %}
+                <a href="{{ download_uri }}">{{ 'download'|trans({}, 'VichUploaderBundle') }}</a>
+            {% endif %}
+            {% if image_url is not null %}
+                <img src="{{ asset(image_url) }}"/>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}

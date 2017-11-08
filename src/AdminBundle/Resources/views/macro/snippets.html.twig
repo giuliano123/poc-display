@@ -1,0 +1,47 @@
+{% macro title(title, subtitle, label) %}
+    <div class="page-header">
+        <h1>{{ title|raw }} {% if subtitle %}<small>- {{ subtitle|raw }}</small>{% endif %} {% if label %}<sup class="h4">{{ label|raw }}</sup>{% endif %}</h1>
+    </div>
+{% endmacro %}
+
+{% macro th(column, label, sort, class) %}
+    {% set order = 'asc' %}
+    {% set sort_class = '' %}
+    {% set order_class = '-alt' %}
+
+    {% if column == sort.column and order == sort.order %}
+        {% set order = 'desc' %}
+        {% set order_class = '' %}
+    {% endif %}
+
+    {% if column == sort.column %}
+        {% set sort_class = true %}
+    {% endif %}
+
+    <th {% if class %}class="{{ class }}"{% endif %}>
+        <a href="?sort={{ column }}&order={{ order }}">{{ label }}</a>
+        {% if sort_class %}<span class="glyphicon glyphicon-sort-by-attributes{{ order_class }}"></span>{% endif %}
+    </th>
+{% endmacro %}
+
+{% macro tr_no_result(nb_column, text) %}
+    <tr>
+        <td class="text-center" colspan="{{ nb_column }}">{% if text %}{{ text }}{% else %}Aucun résultat.{% endif %}</td>
+    </tr>
+{% endmacro %}
+
+{% macro btn_new(url, label, icon) %}
+    <a href="{{ url }}" class="btn btn-block btn-primary btn-lg">
+        <span class="glyphicon glyphicon-{% if icon %}{{ icon }}{% else %}plus{% endif %}"></span> {{ label }}
+    </a>
+{% endmacro %}
+
+{% macro filters_heading(text) %}
+    <div class="panel-heading">
+        <h2 class="panel-title h4">{{ text }}</h2>
+    </div>
+{% endmacro %}
+
+{% macro btn_back(url) %}
+    <a href="{{ url }}" class="btn btn-link">Retour</a>
+{% endmacro %}

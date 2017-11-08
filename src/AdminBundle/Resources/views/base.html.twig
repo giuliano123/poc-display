@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% block admin_metadata %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+    {% endblock %}
+    {#<link rel="shortcut icon" href="{{ asset('favicon.ico', 'admin') }}">#}
+
+    <title>Administration</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+              crossorigin="anonymous">
+        {#<link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}">#}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css"/>
+
+        {% stylesheets
+        '@AdminBundle/Resources/public/css/admin-theme.css'
+        package='admin' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    {% block javascript_head %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    {% endblock %}
+</head>
+
+<body class="{{ app.environment }}">
+{% block page %}
+    <div class="header-specific" style="background: url({{ asset('images/' ~ background_top) }}) no-repeat 0 0;">
+        <div class="container">
+            <div class="box-user">
+                Nom Prénom
+                {#{{ app.user.username }} ({{ app.user.getGroupName() }})#}
+                {#<a href="{{ path('Etf1CmsAdminBundle_logout') }}" class="btn btn-link btn-logout" title="Déconnexion">#}
+                {#<span class="glyphicon glyphicon-off"></span>#}
+                {#</a>#}
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse navbar-static-top navbar-collapse" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('DisplayBundle_Event_list') }}">Administration</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown first">
+                        <a href="#" data-toggle="dropdown">Contenu éditorial <b class="caret"></b></a>
+                        <ul class="dropdown-menu menu_level_1" role="menu" aria-labelledby="dLabel">
+                            <li class="first">
+                                <a href="{{ path('DisplayBundle_Event_list') }}">Spectacles</a>
+                            </li>
+                            <li class="last">
+                                <a href="{{ path('DisplayBundle_Place_list') }}">Lieux</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {#<li class="dropdown">#}
+                        {#<a href="#" data-toggle="dropdown">Médias <b class="caret"></b></a>#}
+                        {#<ul class="dropdown-menu menu_level_1" role="menu" aria-labelledby="dLabel">#}
+                            {#<li class="first">#}
+                                {#<a href="/admin/video/">Vidéothèque</a>#}
+                            {#</li>#}
+                            {#<li>#}
+                                {#<a href="/admin/photo/">Photothèque</a>#}
+                            {#</li>#}
+                            {#<li class="last">#}
+                                {#<a href="/admin/upload/">Upload de fichiers</a>#}
+                            {#</li>#}
+                        {#</ul>#}
+                    {#</li>#}
+                    {#<li class="dropdown last">#}
+                        {#<a href="#" data-toggle="dropdown">Paramétrage <b class="caret"></b></a>#}
+                        {#<ul class="dropdown-menu menu_level_1" role="menu" aria-labelledby="dLabel">#}
+                            {#<li class="first">#}
+                                {#<a href="/admin/article/category/">Catégories d'articles</a>#}
+                            {#</li>#}
+                            {#<li>#}
+                                {#<a href="/admin/video/category/">Catégories de videos</a>#}
+                            {#</li>#}
+                            {#<li>#}
+                                {#<a href="/admin/photo/category/">Catégories d'albums</a>#}
+                            {#</li>#}
+                            {#<li>#}
+                                {#<a href="/admin/tag/">Tags</a>#}
+                            {#</li>#}
+                            {#<li class="divider" role="presentation"><a href="#"></a>#}
+                            {#</li>#}
+                            {#<li>#}
+                                {#<a href="/admin/hagar/preset/">Gabarit d'image</a>#}
+                            {#</li>#}
+                            {#<li class="last">#}
+                                {#<a href="/admin/admin-user/group">Admin &gt; Groupe utilisateur</a>#}
+                            {#</li>#}
+                        {#</ul>#}
+                    {#</li>#}
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div class="container">
+        {% block flashes %}
+            {% if app.session.flashBag.has('success') %}
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Succès !</strong>
+                    {% for success in app.session.flashBag.get('success') %}
+                        <br> {{ success|raw }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if app.session.flashBag.has('error') %}
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Erreur !</strong>
+                    {% for error in app.session.flashBag.get('error') %}
+                        <br> {{ error|raw }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endblock %}
+
+        {% block title %}{% endblock %}
+
+        {% block body %}{% endblock %}
+
+        {% block modals %}{% endblock %}
+    </div>
+
+    <p class="text-center">BackOffice V4 - © TF1 Agence Interactive</p>
+{% block javascripts %}
+    {% javascripts
+    '@AdminBundle/Resources/public/js/*'
+    package='admin' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+{% endblock %}
+</body>
+</html>

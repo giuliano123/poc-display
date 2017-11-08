@@ -1,0 +1,90 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_rows %}
+    {% spaceless %}
+        {% if options is defined %}
+            {% for child in form %}
+                {{ form_row(child, options) }}
+            {% endfor %}
+        {% else %}
+            {% for child in form %}
+                {{ form_row(child) }}
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_rows %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="control-group {{ name }}{% if errors|length > 0 %} error{% endif %}">
+            {{ form_label(form) }}
+            <div class="controls">
+                {{ form_widget(form) }}
+                {% if not compound %}
+                    {{ form_errors(form) }}
+                {% endif %}
+                {{ block('form_help') }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block form_label %}
+    {% spaceless %}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label')|trim}) %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label }}</label>
+    {% endspaceless %}
+{% endblock form_label %}
+
+{#{% block file_widget %}#}
+    {#{% spaceless %}#}
+
+        {#{{ block('form_widget') }}#}
+        {#{% if image_url is not null %}#}
+            {#<img src="{{ asset(image_url) }}"/>#}
+        {#{% endif %}#}
+
+    {#{% endspaceless %}#}
+{#{% endblock %}#}
+
+{% block date_widget %}
+    {% spaceless %}
+        {% if widget == 'single_text' %}
+            {% set attr = attr|merge({ 'class': (attr.class|default('') ~ ' form-control')|trim }) %}
+            {{ block('datepicker_widget') }}
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock date_widget %}
+
+{% block datepicker_widget %}
+    {% spaceless %}
+        <div class="input-group date" data-date="date">
+            {{ block('form_widget_simple') }}
+            <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
+        </div>
+    {% endspaceless %}
+{% endblock datepicker_widget %}
+
+{% block datetime_widget %}
+    {% spaceless %}
+        {% if widget == 'single_text' %}
+            <div data-date="datetime" class="input-group date">
+                {{ block('form_widget_simple') }}
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+        {% else %}
+            {{ parent() }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock datetime_widget %}

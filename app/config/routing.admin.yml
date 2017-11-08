@@ -1,0 +1,4 @@
+# Etf1CmsAdmin
+DisplayBundle_event_admin:
+    resource: "@DisplayBundle/Resources/config/routing/routing.yml"
+    prefix:   /event

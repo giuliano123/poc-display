@@ -1,0 +1,361 @@
+.mb-10 {
+    margin-bottom: 1rem;
+}
+
+.mb-20 {
+    margin-bottom: 2rem;
+}
+
+.mb-48 {
+    margin-bottom: 4.8rem;
+}
+
+.pb-0 {
+    padding-bottom: 0;
+}
+
+.pb-8 {
+    padding-bottom: 0.8rem;
+}
+
+.pb-16 {
+    padding-bottom: 1.6rem;
+}
+
+.pb-24 {
+    padding-bottom: 2.4rem;
+}
+
+.pb-32 {
+    padding-bottom: 3.2rem;
+}
+
+.pb-40 {
+    padding-bottom: 4rem;
+}
+
+.pb-48 {
+    padding-bottom: 4.8rem;
+}
+
+.pb-72 {
+    padding-bottom: 7.2rem;
+}
+
+.pb-150 {
+    padding-bottom: 15rem;
+}
+
+.pt-150 {
+    padding-top: 10rem;
+}
+
+.starter-template {
+  padding: 40px 15px;
+}
+
+.header-specific .container {
+    position: relative;
+    height: 115px;
+}
+
+.header-specific .box-user {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 1px solid #444;
+    border-top: 0;
+    padding: 0 0 0 12px;
+    background: #000;
+    color: #fff;
+    box-shadow: 0 0 15px 4px rgba(255, 255, 255, 0.1);
+}
+
+.checkbox-grid .checkbox-inline {
+  width: 250px;
+}
+
+.checkbox-grid .checkbox-inline:nth-child(3n+1) {
+  margin-left: 0;
+}
+
+.nav > li.locale > a {
+    padding: 10px 10px;
+}
+
+/* Home */
+
+.list-group .list-group-item .btn-trash,
+.grid-matchs .btn-trash,
+.table .btn-toolbar {
+    opacity: .25;
+}
+
+.list-group .list-group-item:hover .btn-trash,
+.grid-matchs .item-match:hover .btn-trash,
+.table tr:hover .btn-toolbar {
+    opacity: 1;
+}
+
+.col-md-9 .table thead th:empty {
+    width: 110px;
+}
+
+.table .danger {
+    margin-left: 20px;
+}
+
+.panel-footer .pagination {
+    margin: 0;
+}
+
+.col-md-3 .btn-block {
+    margin: 0 0 20px;
+}
+
+.col-md-3 .panel-actions {
+    margin: 20px 0 0;
+}
+
+div.form-group label + div.checkbox {
+    margin-top: 0px;
+}
+
+.radio-inline + .checkbox-inline,
+.checkbox-inline + .radio-inline {
+    margin-left: 10px;
+}
+
+.grid-matchs .item-match {
+    position: relative;
+}
+
+.grid-matchs .btn-trash {
+    position: absolute;
+    right: 20px;
+    bottom: 25px;
+}
+
+[data-date="datetime"] {
+    width: 200px;
+}
+
+/* Listes */
+th.action-del {
+    width: 24px;
+}
+
+td.action-del {
+    text-align: center;
+}
+
+.checkbox.inline.no_indent,
+.checkbox.inline.no_indent+.checkbox.inline.no_indent {
+  margin-left: 0;
+  margin-right: 10px;
+}
+.checkbox.inline.no_indent:last-child {
+  margin-right: 0px;
+}
+
+/* model filters */
+.compound-fields {
+  padding: 5px 20px;
+  margin: 0 0 20px 20px;
+  border-left: 5px solid #eee;
+}
+
+/* script addInput */
+[data-function="addInput"] tr + tr {
+    display: none;
+}
+
+[data-function="addInput"] tr:first-child .btn-toolbar {
+    visibility: hidden;
+}
+
+[data-function="addInput"] tr.display {
+    display: table-row;
+}
+
+/* script related form */
+.related-form {
+    margin: 0 0 20px 20px;
+    border-left: 5px solid #EEE;
+    padding: 0 0 0 10px;
+}
+
+/* script relatedInputs */
+[data-role="hidden-inputs"] {
+    margin-left: 25px;
+    padding-left: 20px;
+    border-left: 2px solid #D9D9D9;
+}
+
+/* Differentiation des plateformes */
+@media (max-width: 767px) {
+    body.dev,
+    body.preprod,
+    body.prod {
+        padding-left: 40px;
+    }
+}
+
+body.dev:before,
+body.preprod:before,
+body.prod:before {
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 40px;
+    z-index: 9999;
+}
+
+body.dev:after,
+body.preprod:after,
+body.prod:after {
+    color: #fff;
+    content: "";
+    font-size: 25px;
+    left: 0;
+    width: 200px;
+    position: fixed;
+    top: 220px;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    z-index: 10000;
+    text-align: right;
+    line-height: 40px;
+}
+
+body.prod:before {background: #ED9C28;}
+body.preprod:before {background: #47A447;}
+body.dev:before {background: #999;}
+body.prod:after {content: "PROD";}
+body.preprod:after {content: "PREPROD";}
+body.dev:after {content: "DEV";}
+
+/* Form wallable */
+.highlight-date {
+    display:none;
+    margin-left:20px;
+    border-left: 5px solid #EEEEEE;
+    padding: 5px 15px;
+}
+
+.highlight-date .date-block {
+    margin-top:10px;
+}
+
+.highlight-date .date-block > span {
+    float: left;
+    line-height: 30px;
+}
+
+.highlight-date .date-block > div {
+    margin-left: 80px;
+}
+
+/** spinner */
+@-moz-keyframes rotate-moz {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes rotate-webkit {
+  from { -webkit-transform: rotate(0deg);}
+  to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes rotate-keyframes {
+  from { transform: scale(1) rotate(0deg);}
+  to { transform: scale(1) rotate(360deg);}
+}
+
+.glyphicon-refresh-animate {
+  -animation: rotate-keyframes 2s infinite linear;
+  -webkit-animation: rotate-webkit 2s infinite linear;
+  -moz-animation: rotate-moz 2s linear 0s infinite;
+}
+
+/** tab info */
+div.tab-info {
+    position: relative;
+    display: block;
+}
+
+span.tab-info-content {
+    position:absolute;
+    top:-16px;
+    right:-16px;
+    z-index:10;
+    display:block;
+    padding:5px 8px;
+    font-size:12px;
+    color:#767676;
+    background-color:#fff;
+    border:1px solid #e1e1e8;
+    border-radius:0 4px 0 4px;
+}
+
+/** Thumbnail list */
+.thumbnail-list > div {
+    position: relative;
+    min-height: 1px;
+    padding-right: 5px;
+    padding-left: 5px;
+    float: left;
+}
+
+.thumbnail-list .col-140 {
+    width: 140px;
+}
+
+.thumbnail-list .col-160 {
+    width: 160px;
+}
+
+.thumbnail-list > div .thumbnail  {
+    position: relative;
+}
+
+.thumbnail-list > div .thumbnail:hover {
+    background-color: #f5f5f5;
+}
+
+.thumbnail-list .col-140 img {
+    clip: rect(0px, 120px, 120px, 0px);
+    position: absolute;
+}
+
+.thumbnail-list .col-160 img {
+    clip: rect(0px, 120px, 120px, 0px);
+    position: absolute;
+    left: 15px;
+}
+
+.thumbnail-list .col-140 .caption {
+    margin-top: 120px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.thumbnail-list .col-160 .caption {
+    margin-top: 120px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.thumbnail-list > div .caption p {
+    color: #000000;
+}
+
+.thumbnail-list > div a:hover, .thumbnail-list > div a:visited, .thumbnail-list > div a:link, .thumbnail-list > div a:active {
+    text-decoration: none;
+}

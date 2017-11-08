@@ -1,0 +1,3 @@
+display:
+    resource: "@DisplayBundle/Controller/"
+    type:     annotation

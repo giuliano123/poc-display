@@ -1,0 +1,57 @@
+version: '2.1'
+services:
+    php:
+        build:
+            context:  .
+            args:
+                PROJECT_ENV: dev
+        image: poc/application
+        tty: true
+        environment:
+            # HOST
+            SYMFONY__FRONTEND_URL: http://devwww.poc.fr
+            SYMFONY__FRONTEND_HOSTNAME: devwww.poc.fr
+            SYMFONY__STATIC_HOSTNAME: s.devwww.poc.fr
+            SYMFONY__BACKEND_HOSTNAME: poc.devbackoffice.etf1.tf1.fr
+
+            # DATABASE
+            SYMFONY__DATABASE_HOST: devmutmys701-adm.dedale.tf1.fr
+            SYMFONY__DATABASE_PORT: 4363
+            SYMFONY__DATABASE_NAME: GCANEPA_DEVDCIM701
+            SYMFONY__DATABASE_USER: dev701_usr
+            SYMFONY__DATABASE_PASSWORD: dev701pwd
+
+            # REDIS
+            SYMFONY__REDIS_HOST: redis
+            SYMFONY__REDIS_PORT: 6379
+
+            # GRAYLOG
+            SYMFONY__GRAYLOG_HOST: graylog
+            SYMFONY__GRAYLOG_PORT: 12201
+
+            # CONFIG
+            SYMFONY__SECRET: 15ef9csqcsq*/4dqs9hbdj-
+
+            #HOST
+            APPLICATION_ENV: dev
+            PORT: 80
+        ports:
+            - 80:80
+        volumes:
+            - ./:/var/www/poc-display
+
+    redis:
+        image: redis:3.2-alpine
+        ports:
+            - "6379:6379"
+
+    phpmyadmin:
+        build: ./docker/phpmyadmin
+        image: sport/phpmyadmin
+        environment:
+            PMA_HOST: devmutmys701-adm.dedale.tf1.fr
+            PMA_PORT: 4363
+            PMA_USER: dev701_usr
+            PMA_PASSWORD: dev701pwd
+        ports:
+            - "82:80"

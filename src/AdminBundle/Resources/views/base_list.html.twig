@@ -1,0 +1,19 @@
+{% extends "@Admin/base.html.twig" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                {% block list %}
+                    <table class="table table-striped">
+                        <thead>{% block list_thead %}{% endblock %}</thead>
+                        <tbody>{% block list_tbody %}{% endblock %}</tbody>
+                    </table>
+                {% endblock list %}
+            </div>
+        </div>
+        <div class="col-md-3 bloc-filters">
+            {% block aside %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

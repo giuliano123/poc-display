@@ -1,0 +1,28 @@
+{% extends "@Admin/base.html.twig" %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-9">
+            {{ form_errors(form) }}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {% block form_panel %}{% endblock %}
+                    {{ form_rest(form) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            {% block aside %}
+                {% block panel_navigation %}{% endblock %}
+                {% block panel_actions %}
+                    <div class="panel-actions text-right">
+                        {% block panel_action_cancel %}{% endblock %}
+                        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                    </div>
+                {% endblock %}
+            {% endblock %}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

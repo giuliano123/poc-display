@@ -1,0 +1,9 @@
+{% extends "@Display/Admin/Place/form.html.twig" %}
+
+{% block title %}
+    <h1>Editer le lieu {{ place.title }}</h1>
+{% endblock %}
+{% block panel_action_cancel %}
+    <a href="{{ path("DisplayBundle_Place_list") }}" class="btn btn-link">Retour</a>
+    <a href="{{ path('DisplayBundle_Place_new') }}" data-toggle="tooltip" data-placement="bottom" title="Nouveau Lieu" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></a>
+{% endblock %}

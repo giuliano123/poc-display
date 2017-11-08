@@ -1,0 +1,25 @@
+# --------------------------------------------
+# Apps routes
+# --------------------------------------------
+frontend_routes:
+    resource:      "routing.front.yml"
+    prefix:        /
+    host:          "{_sub_host}%frontend_hostname%"
+    defaults:
+        _app:      frontend
+        _sub_host: ""
+    requirements:
+        _sub_host: ^.*
+
+backend_routes:
+    resource:      "routing.admin.yml"
+    prefix:        /admin
+    host:          "{_sub_host}%backend_hostname%"
+    options:
+        i18n:      false
+    defaults:
+        _app:      backend
+        _sub_host: ""
+        _locale:   fr
+    requirements:
+        _sub_host: .*

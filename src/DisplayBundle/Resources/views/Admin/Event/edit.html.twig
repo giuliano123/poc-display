@@ -1,0 +1,9 @@
+{% extends "@Display/Admin/Event/form.html.twig" %}
+
+{% block title %}
+    <h1>Editer le spectacle {{ event.title }}</h1>
+{% endblock %}
+{% block panel_action_cancel %}
+    <a href="{{ path("DisplayBundle_Event_list") }}" class="btn btn-link">Retour</a>
+    <a href="{{ path('DisplayBundle_Event_new') }}" data-toggle="tooltip" data-placement="bottom" title="Nouveau Spectacle" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></a>
+{% endblock %}
