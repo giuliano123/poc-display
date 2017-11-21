@@ -1,7 +1,7 @@
 # Project conf
 .idea/
 
-# Cache and logs (Symfony3)
+# Cache and logs
 /var/cache/*
 /var/logs/*
 /var/sessions/*
@@ -31,7 +31,8 @@
 /phpunit.xml
 
 # Composer PHAR
-/composer.phar
+composer.phar
+composer.lock
 
 # Build data
 /build/
