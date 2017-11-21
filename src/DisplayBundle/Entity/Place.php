@@ -135,18 +135,6 @@ class Place
     }
 
     /**
-     * @return null|string
-     */
-    public function getImagePath()
-    {
-        if (null === $this->getImage()){
-            return null;
-        }
-
-        return 'uploads/place/'.$this->getImage()->getFileName();
-    }
-
-    /**
      * @return datetime
      */
     public function getCreatedAt()

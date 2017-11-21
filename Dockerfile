@@ -49,7 +49,7 @@ RUN apt-get update -q \
     && npm install -g uglify-es \
     && npm install -g uglifycss \
 
-    # les for font-awesome
+    # less for font-awesome
     && npm install -g less \
 
     # composer

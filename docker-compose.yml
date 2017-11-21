@@ -17,7 +17,7 @@ services:
             # DATABASE
             SYMFONY__DATABASE_HOST: devmutmys701-adm.dedale.tf1.fr
             SYMFONY__DATABASE_PORT: 4363
-            SYMFONY__DATABASE_NAME: GCANEPA_DEVDCIM701
+            SYMFONY__DATABASE_NAME: GCANEPA_DEVSMD701
             SYMFONY__DATABASE_USER: dev701_usr
             SYMFONY__DATABASE_PASSWORD: dev701pwd
 

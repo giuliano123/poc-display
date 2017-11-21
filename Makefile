@@ -19,7 +19,11 @@ init: perm app/config/parameters.yml deps build
 
 start:		    ## Start the project with docler
 start: cc
+ifeq ($(ENV), dev)
 	$(FIG) up -d
+else
+	$(FIG) -f docker-compose-$(ENV).yml up -d
+endif
 
 stop:		    ## Remove docker containers
 	$(FIG) kill
@@ -78,14 +82,9 @@ deploy-prod: check-tag check-prod check-master clean git-reset git-tag deps db-m
 ##---------------------------------------------------------------------------
 
 init-test:	    ## Setup project tests
-init-test: vendor db-model phpunit.xml
+init-test: vendor phpunit.xml
 	$(eval USERNAME := $(shell whoami | tr a-z A-Z))
 	sed -i "s/<LOGIN>/$(USERNAME)/g" phpunit.xml
-	SYMFONY__LOGIN_UP=$(USERNAME) $(CONSOLE) propel:database:drop --force --env=test --connection=default
-	SYMFONY__LOGIN_UP=$(USERNAME) $(CONSOLE) propel:database:create --env=test --connection=default
-	SYMFONY__LOGIN_UP=$(USERNAME) $(CONSOLE) propel:sql:build --env=test --connection=default
-	SYMFONY__LOGIN_UP=$(USERNAME) $(CONSOLE) propel:sql:insert --env=test --connection=default --force
-
 
 test:		    ## Run the PHP tests
 test:
@@ -100,7 +99,7 @@ deps: vendor
 
 deps-update:	    ## Update the project PHP dependencies
 deps-update:
-	$(COMPOSER) update --prefer-source --profile
+	$(COMPOSER) update --prefer-source --profile --ignore-platform-reqs
 
 ##
 

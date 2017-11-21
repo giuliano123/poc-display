@@ -18,16 +18,13 @@ class PlaceType extends AbstractType
             ->add('title', TextType::class, ['label' => 'Titre'])
             ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
             ->add('imageFile', VichFileType::class, [
+                'label' => 'Image d\'illustration',
                 'required' => false,
                 'allow_delete' => false,
                 'image_property' => 'imageFile',
                 'download_link' => false
             ])
-//            ->add('image', FileType::class, [
-//                'data_class' => null,
-//                'image_property' => 'imagePath',
-//                'required' => false
-//            ])
+
             ->getForm();
     }
 

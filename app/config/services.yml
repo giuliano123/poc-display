@@ -35,7 +35,7 @@ services:
 #        arguments: [ "@display.file.uploader" ]
 #        tags:
 #            - { name: doctrine.orm.entity_listener }
-
+#
 #    display.event.upload.listener:
 #        class: DisplayBundle\EventListener\EventUploadListener
 #        arguments: [ "@display.file.uploader" ]
