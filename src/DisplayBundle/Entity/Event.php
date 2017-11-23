@@ -3,6 +3,7 @@
 namespace DisplayBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
@@ -33,6 +34,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -47,6 +49,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="event_date", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $eventDate;
 
@@ -54,6 +57,7 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="publication_date", type="datetime")
+     * @Assert\NotBlank()
      */
     private $publicationDate;
 
@@ -61,12 +65,14 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="publication_end_date", type="datetime")
+     * @Assert\NotBlank()
      */
     private $publicationEndDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="DisplayBundle\Entity\Place", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
+     * @Assert\NotBlank(message="Vous devez choisir un lieu")
      */
     private $place;
 
@@ -74,6 +80,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="poster", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez choisir un poster")
      */
     private $poster;
 
@@ -81,6 +88,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="picture", type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez choisir une image")
      */
     private $picture;
 

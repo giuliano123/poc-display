@@ -94,3 +94,4 @@ vich_uploader:
             place_image:
                 uri_prefix:         /uploads/place
                 upload_destination: '%kernel.root_dir%/../web/uploads/place'
+                namer:              vich_uploader.namer_uniqid
