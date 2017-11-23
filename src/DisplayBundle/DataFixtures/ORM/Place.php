@@ -13,7 +13,7 @@ class Place extends Fixture
             $place = new \DisplayBundle\Entity\Place();
             $place->setTitle('Title '.$i);
             $place->setImage('Image '.$i);
-            $place->getCreatedAt(new \DateTime('now'));
+            $place->setCreatedAt(new \DateTime('now'));
             $manager->persist($place);
         }
 

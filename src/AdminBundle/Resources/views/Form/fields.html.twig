@@ -8,7 +8,7 @@
         {% if not form.vars.valid %}
             {% set container_attr = container_attr|merge({'class': (container_attr.class|default('') ~ ' has-error')}) %}
         {% endif %}
-        <div{% for attrname, attrvalue in container_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        <div {% for attrname, attrvalue in container_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
         {{ form_label(form) }}
         {{ form_widget(form) }}
         {{ block('form_help') }}
@@ -97,7 +97,7 @@
             {% if required %}
                 {% set label = label ~ ' *' %}
             {% endif %}
-            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+            <label {% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
             {{ block('checkbox_widget') }}
             {{ label|trans({}, translation_domain)|raw }}
             </label>

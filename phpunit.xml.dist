@@ -15,7 +15,7 @@
         <server name="KERNEL_CLASS" value="AppKernel" />
         <server name="KERNEL_DIR" value="app" />
 
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
 
         <env name="SYMFONY__DATABASE_HOST" value="devmutmys701-adm.dedale.tf1.fr" />
         <env name="SYMFONY__DATABASE_POST" value="4363" />

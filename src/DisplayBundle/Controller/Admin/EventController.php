@@ -115,7 +115,7 @@ class EventController extends Controller
 
             $request->getSession()->getFlashBag()->add('success', 'Le spectacle a été supprimé.');
         } catch (Exception $e) {
-            $this->get('session')->setFlash('error', "Erreur lors de la suppression du spectacle: ".$e->getMessage());
+            $this->get('session')->setFlash('error', 'Erreur lors de la suppression du spectacle: '.$e->getMessage());
         }
 
         return $this->redirectToRoute('DisplayBundle_Event_list');

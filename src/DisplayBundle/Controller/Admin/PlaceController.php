@@ -118,7 +118,7 @@ class PlaceController extends Controller
 
             $request->getSession()->getFlashBag()->add('success', 'Le lieu a été supprimé.');
         } catch (Exception $e) {
-            $this->get('session')->setFlash('error', "Erreur lors de la suppression du lieu: ".$e->getMessage());
+            $this->get('session')->setFlash('error', 'Erreur lors de la suppression du lieu: '.$e->getMessage());
         }
 
         return $this->redirectToRoute('DisplayBundle_Place_list');

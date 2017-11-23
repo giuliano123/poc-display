@@ -19,8 +19,8 @@
         {% for place in places %}
             <tr>
                 <th scope="row">{{ place.id }}</th>
-                <th>{{ place.title }}</th>
-                <th>
+                <th class="title">{{ place.title }}</th>
+                <th class="action">
                     <div class="btn-toolbar" role="toolbar">
                         <a href="{{ path('DisplayBundle_Place_edit', {'pk': place.id}) }}" class="btn btn-xs btn-default" title="Editer le lieu">
                             <span class="glyphicon glyphicon-pencil"></span>

@@ -118,7 +118,7 @@
 }
 
 div.form-group label + div.checkbox {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .radio-inline + .checkbox-inline,
@@ -155,7 +155,7 @@ td.action-del {
   margin-right: 10px;
 }
 .checkbox.inline.no_indent:last-child {
-  margin-right: 0px;
+  margin-right: 0;
 }
 
 /* model filters */
@@ -342,14 +342,14 @@ span.tab-info-content {
 
 .thumbnail-list .col-140 .caption {
     margin-top: 120px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .thumbnail-list .col-160 .caption {
     margin-top: 120px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .thumbnail-list > div .caption p {

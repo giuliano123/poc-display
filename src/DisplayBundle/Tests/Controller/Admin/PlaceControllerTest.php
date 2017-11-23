@@ -5,7 +5,6 @@ namespace DisplayBundle\Tests\Controller\Admin;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\StringInput;
-use Symfony\Component\HttpFoundation\Response;
 
 class PlaceControllerTest extends WebTestCase
 {
@@ -53,31 +52,74 @@ class PlaceControllerTest extends WebTestCase
             array('/admin/event/'),
 //            array('/admin/event/new'),
             array('/admin/event/place'),
-            array('/admin/event/place/new')
+            array('/admin/event/place/new'),
         );
     }
 
-//    public function testShowPlace()
-//    {
-//        $client = $this->getClient();
-//
-//        $crawler = $client->request('GET', '/admin/event/place');
-//
-//        $this->assertEquals(
-//            Response::HTTP_OK,
-//            $client->getResponse()->getStatusCode()
-//        );
-//
-//        $this->assertGreaterThan(
-//            0,
-//            $crawler->filter('html:contains("Module lieu")')->count()
-//        );
-//
-//        $this->assertContains(
-//            'Module lieu',
-//            $client->getResponse()->getContent()
-//        );
-//    }
+    public function testShowPlace()
+    {
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/admin/event/place');
+
+        $this->assertContains(
+            'Module lieu',
+            $client->getResponse()->getContent()
+        );
+
+        $this->assertContains(
+            'Liste des lieux',
+            $client->getResponse()->getContent()
+        );
+    }
+
+    public function testPlaceListNotEmpty()
+    {
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/admin/event/place');
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('.panel table.table tbody tr')->count()
+        );
+    }
+
+    public function testplaceListHasEditAction()
+    {
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/admin/event/place');
+
+        $this->assertContains(
+            'Editer le lieu',
+            $client->getResponse()->getContent()
+        );
+    }
+
+    public function testEditLink()
+    {
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/admin/event/place');
+
+        $placeLink = $crawler->filter('.action a')->first();
+        $placeTitle = $crawler->filter('.title')->text();
+
+        $crawler    = $client->click($placeLink->link());
+
+        $this->assertContains(
+            $placeTitle,
+            $client->getResponse()->getContent()
+        );
+    }
+
+    public function testPlaceHasNewLink()
+    {
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/admin/event/place');
+    }
 
     protected function getClient()
     {
