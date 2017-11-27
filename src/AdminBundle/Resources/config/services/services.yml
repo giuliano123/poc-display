@@ -1,0 +1,4 @@
+services:
+    admin.amazons3:
+        class: AdminBundle\Storage\AmazonStorage
+        arguments: [ '%admin.aws3.configuration%', '%admin.aws3.bucket%', '%admin.aws3.base_path%' ]

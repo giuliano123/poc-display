@@ -36,6 +36,7 @@ class VichyTypeExtension extends AbstractTypeExtension
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefined(array('image_property'));
+        $resolver->setDefined(array('preset'));
     }
 
     /**
@@ -53,10 +54,16 @@ class VichyTypeExtension extends AbstractTypeExtension
 
             $imageUrl = null;
             if (null !== $parentData) {
-                $imageUrl = $this->helper->asset($parentData, 'imageFile');
+                $imageUrl = $this->helper->asset($parentData, $options['image_property']);
             }
 
             $view->vars['image_url'] = $imageUrl;
+        }
+
+        if (isset($options['preset'])) {
+            list($width, $height) = explode('x', $options['preset']);
+            $view->vars['image_width'] = $width;
+            $view->vars['image_height'] = $height;
         }
     }
 }

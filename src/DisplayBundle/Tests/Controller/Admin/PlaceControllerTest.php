@@ -34,7 +34,7 @@ class PlaceControllerTest extends WebTestCase
             'new_image.png'
         );
 
-//        self::runCommand('doctrine:fixtures:load --no-interaction');
+        self::runCommand('doctrine:fixtures:load --no-interaction');
     }
 
     protected function tearDown()

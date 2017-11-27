@@ -37,6 +37,7 @@ class PlaceType extends AbstractType
                         'allow_delete' => false,
                         'image_property' => 'imageFile',
                         'download_link' => false,
+                        'preset' => '359x96'
                     ]
                 );
             }

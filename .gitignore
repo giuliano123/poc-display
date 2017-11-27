@@ -21,7 +21,6 @@
 
 # Assets and user uploads
 /web/bundles/
-/web/uploads/
 
 # Js and Css
 /web/css/

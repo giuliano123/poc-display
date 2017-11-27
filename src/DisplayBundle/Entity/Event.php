@@ -3,6 +3,8 @@
 namespace DisplayBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -10,7 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="DisplayBundle\Repository\EventRepository")
- * @ORM\EntityListeners({"DisplayBundle\EventListener\EventUploadListener"})
+ * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
 class Event
 {
@@ -48,8 +51,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="event_date", type="string", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(name="event_date", type="string", length=255, nullable = true)
      */
     private $eventDate;
 
@@ -77,20 +79,46 @@ class Event
     private $place;
 
     /**
+     * @Vich\UploadableField(mapping="event_poster", fileNameProperty="poster")
+     *
+     * @var File
+     */
+    private $posterFile;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="poster", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez choisir un poster")
      */
     private $poster;
+
+    /**
+     * @Vich\UploadableField(mapping="event_picture", fileNameProperty="picture")
+     *
+     * @var File
+     */
+    private $pictureFile;
 
     /**
      * @var string
      *
      * @ORM\Column(name="picture", type="string", length=255)
-     * @Assert\NotBlank(message="Vous devez choisir une image")
      */
     private $picture;
+
+    /**
+     * @var datetime $created
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $createdAt;
+
+    /**
+     * @var datetime $updated
+     *
+     * @ORM\Column(type="datetime", nullable = true)
+     */
+    protected $updatedAt;
 
     /**
      * @return mixed
@@ -238,6 +266,22 @@ class Event
         return $this->publicationEndDate;
     }
 
+    public function setPosterFile(File $image = null)
+    {
+        if ($image) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        $this->posterFile = $image;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getPosterFile()
+    {
+        return $this->posterFile;
+    }
+
     /**
      * @return string
      */
@@ -254,16 +298,20 @@ class Event
         $this->poster = $poster;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getPosterPath()
+    public function setPictureFile(File $image = null)
     {
-        if (null === $this->getPoster()) {
-            return null;
+        if ($image) {
+            $this->updatedAt = new \DateTimeImmutable();
         }
+        $this->pictureFile = $image;
+    }
 
-        return 'uploads/event/'.$this->getPoster()->getFileName();
+    /**
+     * @return File|null
+     */
+    public function getPictureFile()
+    {
+        return $this->pictureFile;
     }
 
     /**
@@ -283,20 +331,48 @@ class Event
     }
 
     /**
-     * @return null|string
+     * @return datetime
      */
-    public function getPicturePath()
+    public function getCreatedAt()
     {
-        if (null === $this->getPicture()) {
-            return null;
-        }
-
-        return $this->getTargetDir() . $this->getPicture()->getFileName();
+        return $this->createdAt;
     }
 
-    public function getTargetDir()
+    /**
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
     {
-        return 'uploads/event/';
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return datetime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param datetime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
     }
 
 }

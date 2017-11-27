@@ -14,3 +14,14 @@ web_profiler:
 
 #swiftmailer:
 #    disable_delivery: true
+
+knp_gaufrette:
+    stream_wrapper: ~
+
+    adapters:
+        amazon.adapter:
+            aws_s3:
+                service_id:   admin.aws_s3.client
+                bucket_name:    ai-static
+                options:
+                    directory:  test/poc

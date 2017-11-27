@@ -215,15 +215,6 @@
     {% endspaceless %}
 {% endblock %}
 
-{#{% block file_widget %}#}
-    {#{% spaceless %}#}
-        {#{{ block('form_widget') }}#}
-        {#{% if image_url is not null %}#}
-            {#<img src="{{ asset(image_url) }}"/>#}
-        {#{% endif %}#}
-    {#{% endspaceless %}#}
-{#{% endblock %}#}
-
 {% block vich_file_widget %}
     {% spaceless %}
         <div class="vich-file">
@@ -235,8 +226,11 @@
             {% if download_uri is defined and download_uri %}
                 <a href="{{ download_uri }}">{{ 'download'|trans({}, 'VichUploaderBundle') }}</a>
             {% endif %}
-            {% if image_url is not null %}
-                <img src="{{ asset(image_url) }}"/>
+            {% if image_url is defined and image_url %}
+                <img src="{{ asset(image_url) }}"
+                        {% if image_width is defined and image_width %} width="{{ image_width }}px" {% endif %}
+                        {% if image_height is defined and image_height %} height="{{ image_height }}px" {% endif %}
+                />
             {% endif %}
         </div>
     {% endspaceless %}

@@ -90,8 +90,66 @@ assetic:
 
 vich_uploader:
     db_driver: orm
+    storage:   gaufrette
     mappings:
             place_image:
-                uri_prefix:         /uploads/place
-                upload_destination: '%kernel.root_dir%/../web/uploads/place'
+                uri_prefix:         https://ai-static.s3.amazonaws.com/dev/poc
+                upload_destination: product_image_fs
                 namer:              vich_uploader.namer_uniqid
+                directory_namer:
+                    service: admin.vich_uploader.dicrectory_namer
+                    options: {subdir: 'place'}
+                delete_on_remove: true
+                delete_on_update: true
+
+            event_poster:
+                uri_prefix:         https://ai-static.s3.amazonaws.com/dev/poc
+                upload_destination: product_image_fs
+                namer:              vich_uploader.namer_uniqid
+                directory_namer:
+                    service: admin.vich_uploader.dicrectory_namer
+                    options: {subdir: 'event'}
+                delete_on_remove: true
+                delete_on_update: true
+
+            event_picture:
+                uri_prefix:         https://ai-static.s3.amazonaws.com/dev/poc
+                upload_destination: product_image_fs
+                namer:              vich_uploader.namer_uniqid
+                directory_namer:
+                    service: admin.vich_uploader.dicrectory_namer
+                    options: {subdir: 'event'}
+                delete_on_remove: true
+                delete_on_update: true
+
+admin:
+    aws3:
+        configuration:
+            version:             latest
+            region:              eu-west-1
+            signature_version:   v4
+            credentials:
+                key:             AKIAIW64KDSKONKGV7JQ
+                secret:          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
+            http:
+                connect_timeout: 3
+                timeout:         8
+        bucket:                  ai-static
+        base_path:               dev/poc
+
+
+knp_gaufrette:
+    stream_wrapper: ~
+
+    adapters:
+        amazon.adapter:
+            aws_s3:
+                service_id:     admin.aws_s3.client
+                bucket_name:    ai-static
+                options:
+                    directory:  dev/poc
+                    acl:        'public-read'
+
+    filesystems:
+        product_image_fs:
+            adapter:            amazon.adapter

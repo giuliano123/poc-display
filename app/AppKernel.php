@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             new DisplayBundle\DisplayBundle(),
             new AdminBundle\AdminBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

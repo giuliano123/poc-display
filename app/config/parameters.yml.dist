@@ -1,9 +1,9 @@
 parameters:
-    database_host: devmutmys701-adm.dedale.tf1.fr
-    database_port: 4363
-    database_name: GCANEPA_DEVSMD701
-    database_user: dev701_usr
-    database_password: dev701pwd
+    database_host: '%env(SYMFONY__DATABASE_HOST)%'
+    database_port: '%env(SYMFONY__DATABASE_PORT)%'
+    database_name: '%env(SYMFONY__DATABASE_NAME)%'
+    database_user: '%env(SYMFONY__DATABASE_USER)%'
+    database_password: '%env(SYMFONY__DATABASE_PASSWORD)%'
     secret: ThisTokenIsNotSoSecretChangeIt
     mailer_transport: smtp
     mailer_host: 127.0.0.1
