@@ -19,23 +19,3 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    display.file.extension:
-        class: DisplayBundle\Extension\VichyTypeExtension
-        tags:
-            - { name: form.type_extension, extended_type: Vich\UploaderBundle\Form\Type\VichFileType }
-        arguments: [ "@vich_uploader.templating.helper.uploader_helper" ]
-
-    admin.aws_s3.client:
-        class: Aws\S3\S3Client
-        factory: [Aws\S3\S3Client, 'factory']
-        arguments:
-            -
-                version: latest
-                credentials:
-                    key: AKIAIW64KDSKONKGV7JQ
-                    secret: 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
-                region: eu-west-1
-
-    admin.vich_uploader.dicrectory_namer:
-        class: AdminBundle\Namer\VichDirectoryNamer
-        public: true

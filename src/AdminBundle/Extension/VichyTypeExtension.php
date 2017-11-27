@@ -1,6 +1,6 @@
 <?php
 
-namespace DisplayBundle\Extension;
+namespace AdminBundle\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
