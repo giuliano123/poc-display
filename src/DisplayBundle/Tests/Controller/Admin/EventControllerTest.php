@@ -2,17 +2,49 @@
 
 namespace DisplayBundle\Tests\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\StringInput;
 
-class PlaceControllerTest extends WebTestCase
+class EventControllerTest extends WebTestCase
 {
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
+    protected $file;
+    protected $image;
+
     protected static $application;
 
     protected function setUp()
     {
-        self::runCommand('doctrine:fixtures:load --no-interaction');
+        $kernel = self::bootKernel();
+
+        $this->em = $kernel->getContainer()
+            ->get('doctrine')
+            ->getManager();
+
+        $this->file = tempnam(sys_get_temp_dir(), 'upl');
+        imagepng(imagecreatetruecolor(10, 10), $this->file);
+        $this->image = new UploadedFile(
+            $this->file,
+            'new_image.png'
+        );
+
+//        self::runCommand('doctrine:fixtures:load --no-interaction');
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+
+        $this->em->close();
+        $this->em = null;
+
+        unlink($this->file);
     }
 
     /**
@@ -29,24 +61,24 @@ class PlaceControllerTest extends WebTestCase
     public function urlProvider()
     {
         return array(
-            array('/admin/event/place'),
-            array('/admin/event/place/new'),
+            array('/admin/event/'),
+            array('/admin/event/new'),
         );
     }
 
-    public function testShowPlace()
+    public function testShowEvent()
     {
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/admin/event/place');
+        $crawler = $client->request('GET', '/admin/event/');
 
         $this->assertContains(
-            'Module lieu',
+            'Module spectacle',
             $client->getResponse()->getContent()
         );
 
         $this->assertContains(
-            'Liste des lieux',
+            'Liste des spectacles',
             $client->getResponse()->getContent()
         );
     }
@@ -55,7 +87,7 @@ class PlaceControllerTest extends WebTestCase
     {
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/admin/event/place');
+        $crawler = $client->request('GET', '/admin/event/');
 
         $this->assertGreaterThan(
             0,
@@ -67,10 +99,10 @@ class PlaceControllerTest extends WebTestCase
     {
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/admin/event/place');
+        $crawler = $client->request('GET', '/admin/event/');
 
         $this->assertContains(
-            'Editer le lieu',
+            'Editer le spectacle',
             $client->getResponse()->getContent()
         );
     }
@@ -79,7 +111,7 @@ class PlaceControllerTest extends WebTestCase
     {
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/admin/event/place');
+        $crawler = $client->request('GET', '/admin/event/');
 
         $placeLink = $crawler->filter('.action a')->first();
         $placeTitle = $crawler->filter('.title')->text();
@@ -96,10 +128,10 @@ class PlaceControllerTest extends WebTestCase
     {
         $client = $this->getClient();
 
-        $crawler = $client->request('GET', '/admin/event/place');
+        $crawler = $client->request('GET', '/admin/event/');
 
         $this->assertContains(
-            'Ajouter un lieu',
+            'Ajouter un spectacle',
             $client->getResponse()->getContent()
         );
 
@@ -110,7 +142,7 @@ class PlaceControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertContains(
-            'Ajouter un lieu',
+            'Ajouter un spectacle',
             $client->getResponse()->getContent()
         );
     }

@@ -20,9 +20,9 @@
         {% for event in events %}
             <tr>
                 <th scope="row">{{ event.id }}</th>
-                <th>{{ event.title }}</th>
+                <th class="title">{{ event.title }}</th>
                 <th>{{ event.publicationDate.format('d/m/Y') }}</th>
-                <th>
+                <th class="action">
                     <div class="btn-toolbar" role="toolbar">
                         <a href="{{ path('DisplayBundle_Event_edit', {'pk': event.id}) }}" class="btn btn-xs btn-default" title="Editer le spectacle">
                             <span class="glyphicon glyphicon-pencil"></span>

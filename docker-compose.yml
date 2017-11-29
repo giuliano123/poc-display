@@ -36,9 +36,6 @@ services:
             APPLICATION_ENV: dev
             PORT: 80
 
-            #AMAZON
-            SYMFONY__AMAZON_KEY: AKIAIW64KDSKONKGV7JQ
-            SYMFONY__AMAZON_SECRET: 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
         ports:
             - 80:80
         volumes:

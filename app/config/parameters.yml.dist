@@ -9,3 +9,6 @@ parameters:
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
+
+    amazon_key:     amazon_key
+    amazon_secret:  amazon_secret

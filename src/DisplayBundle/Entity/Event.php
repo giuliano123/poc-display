@@ -37,7 +37,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Le champ 'titre' est obligatoire")
      */
     private $title;
 
@@ -59,7 +59,7 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="publication_date", type="datetime")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Le champ 'date de publication' est obligatoire")
      */
     private $publicationDate;
 
