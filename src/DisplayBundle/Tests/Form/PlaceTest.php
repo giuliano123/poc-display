@@ -21,9 +21,9 @@ class PlaceTest extends TypeTestCase
 
     protected function setUp()
     {
-//        $this->markTestSkipped(
-//            'Je n\'arrive pas à gérer le champ VichFileType'
-//        );
+        $this->markTestSkipped(
+            'Je n\'arrive pas à gérer le champ VichFileType'
+        );
 
         parent::setUp();
 

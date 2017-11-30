@@ -129,12 +129,12 @@ admin:
             region:              eu-west-1
             signature_version:   v4
             credentials:
-                key:             AKIAIW64KDSKONKGV7JQ
-                secret:          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
+                key:             '%amazon_key%'
+                secret:          '%amazon_secret%'
             http:
                 connect_timeout: 3
                 timeout:         8
-        bucket:                  ai-static
+        bucket:                  '%amazon_bucket%'
         base_path:               dev/poc
 
 
@@ -145,7 +145,7 @@ knp_gaufrette:
         amazon.adapter:
             aws_s3:
                 service_id:     admin.aws_s3.client
-                bucket_name:    ai-static
+                bucket_name:    '%amazon_bucket%'
                 options:
                     directory:  dev/poc
                     acl:        'public-read'

@@ -12,3 +12,4 @@ parameters:
 
     amazon_key:     amazon_key
     amazon_secret:  amazon_secret
+    amazon_bucket:  amazon_bucket
