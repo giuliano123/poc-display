@@ -18,7 +18,9 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             new DisplayBundle\DisplayBundle(),
             new AdminBundle\AdminBundle(),
-            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle()
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new UserBundle\UserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -26,6 +28,7 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
 
             if ('dev' === $this->getEnvironment()) {
                 $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();

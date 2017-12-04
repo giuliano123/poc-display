@@ -1,0 +1,54 @@
+{% extends "@Admin/base.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/user/css/login.css') }}">
+{% endblock %}
+
+{% block page %}
+    <div class="header-specific" style="background: url({{ asset('images/' ~ background_top) }}) no-repeat 0 0;">
+        <div class="container"></div>
+    </div>
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ path('fos_user_security_login') }}">Administration</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        {% block flashes %}
+            {% if app.session.flashBag.has('success') %}
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Succès !</strong>
+                    {% for success in app.session.flashBag.get('success') %}
+                        <br> {{ success|trans()|raw }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if app.session.flashBag.has('error') %}
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Erreur !</strong>
+                    {% for error in app.session.flashBag.get('error') %}
+                        <br> {{ error|trans()|raw }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endblock %}
+        {% if error %}
+            <div class="text-danger">{{ error.message }}</div>
+        {% endif %}
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+        <form class="form-signin" role="form" method="post" action="{{ path('fos_user_security_check') }}">
+            <input type="text" name="_username" class="form-control" placeholder="Identifiant" required autofocus>
+            <input type="password" name="_password" class="form-control" placeholder="Mot de passe" required>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+            <p class="text-right"><a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a></p>
+        </form>
+    </div> <!-- /container -->
+{% endblock %}
+

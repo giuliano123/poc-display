@@ -38,11 +38,10 @@
     <div class="header-specific" style="background: url({{ asset('images/' ~ background_top) }}) no-repeat 0 0;">
         <div class="container">
             <div class="box-user">
-                Nom Prénom
-                {#{{ app.user.username }} ({{ app.user.getGroupName() }})#}
-                {#<a href="{{ path('Etf1CmsAdminBundle_logout') }}" class="btn btn-link btn-logout" title="Déconnexion">#}
-                {#<span class="glyphicon glyphicon-off"></span>#}
-                {#</a>#}
+                {{ app.user.username }}
+                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-link btn-logout" title="Déconnexion">
+                <span class="glyphicon glyphicon-off"></span>
+                </a>
             </div>
         </div>
     </div>
@@ -71,45 +70,6 @@
                             </li>
                         </ul>
                     </li>
-                    {#<li class="dropdown">#}
-                        {#<a href="#" data-toggle="dropdown">Médias <b class="caret"></b></a>#}
-                        {#<ul class="dropdown-menu menu_level_1" role="menu" aria-labelledby="dLabel">#}
-                            {#<li class="first">#}
-                                {#<a href="/admin/video/">Vidéothèque</a>#}
-                            {#</li>#}
-                            {#<li>#}
-                                {#<a href="/admin/photo/">Photothèque</a>#}
-                            {#</li>#}
-                            {#<li class="last">#}
-                                {#<a href="/admin/upload/">Upload de fichiers</a>#}
-                            {#</li>#}
-                        {#</ul>#}
-                    {#</li>#}
-                    {#<li class="dropdown last">#}
-                        {#<a href="#" data-toggle="dropdown">Paramétrage <b class="caret"></b></a>#}
-                        {#<ul class="dropdown-menu menu_level_1" role="menu" aria-labelledby="dLabel">#}
-                            {#<li class="first">#}
-                                {#<a href="/admin/article/category/">Catégories d'articles</a>#}
-                            {#</li>#}
-                            {#<li>#}
-                                {#<a href="/admin/video/category/">Catégories de videos</a>#}
-                            {#</li>#}
-                            {#<li>#}
-                                {#<a href="/admin/photo/category/">Catégories d'albums</a>#}
-                            {#</li>#}
-                            {#<li>#}
-                                {#<a href="/admin/tag/">Tags</a>#}
-                            {#</li>#}
-                            {#<li class="divider" role="presentation"><a href="#"></a>#}
-                            {#</li>#}
-                            {#<li>#}
-                                {#<a href="/admin/hagar/preset/">Gabarit d'image</a>#}
-                            {#</li>#}
-                            {#<li class="last">#}
-                                {#<a href="/admin/admin-user/group">Admin &gt; Groupe utilisateur</a>#}
-                            {#</li>#}
-                        {#</ul>#}
-                    {#</li>#}
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

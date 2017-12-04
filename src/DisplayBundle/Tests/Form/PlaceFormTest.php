@@ -55,10 +55,12 @@ class PlaceFormTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertRegExp(
-            '/Le champ &#039;titre&#039; est obligatoire/',
-            $client->getResponse()->getContent()
-        );
+//        $this->assertRegExp(
+//            '/Le champ &#039;titre&#039; est obligatoire/',
+//            $client->getResponse()->getContent()
+//        );
+
+        $this->assertEquals(1, $crawler->filter('.alert-danger')->count());
     }
 
     public function testFormFill()

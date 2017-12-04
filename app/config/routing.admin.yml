@@ -2,3 +2,9 @@
 DisplayBundle_event_admin:
     resource: "@DisplayBundle/Resources/config/routing/routing.yml"
     prefix:   /event
+
+AdminBundle:
+    resource: "@AdminBundle/Resources/config/routing/routing.yml"
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

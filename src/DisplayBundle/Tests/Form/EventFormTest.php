@@ -56,10 +56,12 @@ class EventFormTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertRegExp(
-            '/Le champ &#039;date de publication&#039; est obligatoire/',
-            $client->getResponse()->getContent()
-        );
+//        $this->assertRegExp(
+//            '/Le champ &#039;date de publication&#039; est obligatoire/',
+//            $client->getResponse()->getContent()
+//        );
+
+        $this->assertEquals(2, $crawler->filter('.alert-danger')->count());
     }
 
     public function testFormFill()
@@ -70,30 +72,30 @@ class EventFormTest extends WebTestCase
 
         $form = $crawler->selectButton('Sauvegarder')->form();
 
-        /** @var Crawler $place */
-        $place = $crawler->filter('#event_place')->first();
-//        var_dump($place->first());
+        $form['event[publicationDate]'] = date('d/m/Y');
 
-//        $form['event[publicationDate]'] = date('d/m/Y');
-//
-//        $form['event[title]'] = 'I am a test';
-//
-//        $form['event[pictureFile][file]']->upload($this->image);
-//        $form['event[posterFile][file]']->upload($this->image);
-//
-//        $crawler = $client->submit($form);
-//        $this->assertTrue($client->getResponse()->isRedirect());
-//        $client->followRedirect();
-//
-//        $this->assertContains(
-//            'Succès !',
-//            $client->getResponse()->getContent()
-//        );
-//
-//        $this->assertContains(
-//            'I am a test',
-//            $client->getResponse()->getContent()
-//        );
+        $form['event[title]'] = 'I am a Place title';
+
+        $form['event[subtitle]'] = 'I am a Place subtitle';
+
+        $form['event[eventDate]'] = 'I am a Place date';
+
+        $form['event[pictureFile][file]']->upload($this->image);
+        $form['event[posterFile][file]']->upload($this->image);
+
+        $crawler = $client->submit($form);
+        $this->assertTrue($client->getResponse()->isRedirect());
+        $client->followRedirect();
+
+        $this->assertContains(
+            'Succès !',
+            $client->getResponse()->getContent()
+        );
+
+        $this->assertContains(
+            'I am a Place title',
+            $client->getResponse()->getContent()
+        );
     }
 
 
