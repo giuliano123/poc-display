@@ -8,3 +8,8 @@ AdminBundle:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /users
+
+UserBundle:
+    resource: "@UserBundle/Resources/config/routing/routing.yml"
+    prefix:   /users

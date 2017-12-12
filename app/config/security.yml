@@ -26,6 +26,7 @@ security:
             pattern:  ^/admin
             host:     %backend_hostname%
             security: true
+            http_basic: ~
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager

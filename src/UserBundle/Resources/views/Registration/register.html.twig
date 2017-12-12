@@ -1,0 +1,36 @@
+{% extends "@Admin/base_form.html.twig" %}
+{% block title %}
+    <h1>Ajouter un utilisateur</h1>
+{% endblock %}
+{% block form_panel %}
+    <div class="tab-content">
+        <div class="tab-pane active" id="params">
+            <div class="row">
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>Informations générales</legend>
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.lastName) }}
+                        {{ form_row(form.email) }}
+                    </fieldset>
+                </div>
+                <div class="col-md-12">
+                    <fieldset>
+                        <legend>Paramètres de connexion</legend>
+                        {{ form_row(form.username) }}
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block panel_navigation %}
+    <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#params" data-toggle="tab">Paramètres</a></li>
+    </ul>
+{% endblock %}
+
+{% block panel_action_cancel %}
+    <a href="{{ path("UserBundle_Index") }}" class="btn btn-link">Retour</a>
+{% endblock %}
